@@ -1,111 +1,184 @@
-# WASSALNI – Mobile Delivery Supervision Application
+# 📦 WASSALNI  
+### Mobile Delivery Supervision Application
 
-WASSALNI is a full-stack Android application designed for **real-time delivery supervision** within a delivery company.
+WASSALNI is a **full-stack Android application** designed for real-time delivery supervision within a delivery company.
 
-The system supports two user roles:
+It was developed as part of the **Mobile Development Project (2025–2026)** at **ENICarthage**.
 
-- **Controllers** → supervise deliveries, monitor statistics, communicate with delivery agents
-- **Delivery Drivers** → manage assigned deliveries, update delivery status, communicate urgent issues
-
-The project was developed as part of my **Mobile Development Project (2025–2026)** at **ENICarthage**.
+The system digitalizes and centralizes delivery management through real-time monitoring, role-based access, messaging, statistics, and offline synchronization.
 
 ---
 
-## Features
+## 🚀 Overview
 
-### Controller Module
+The application supports **two user roles**:
+
+### 👨‍💼 Controller
+Responsible for supervising deliveries and monitoring operations.
+
+### 🚚 Delivery Driver
+Responsible for managing assigned deliveries and updating delivery states in real time.
+
+The main objective is to provide:
+
+- Real-time delivery tracking
+- Instant communication
+- Offline access
+- Automatic synchronization
+- Delivery performance supervision
+
+---
+
+# ✨ Features
+
+## Controller Module
+
 - View all deliveries
-- Filter deliveries by status, driver, client, or date
+- Filter deliveries by:
+  - Status
+  - Driver
+  - Client
+  - Delivery date
 - Search deliveries
 - View delivery details
-- Monitor delivery statistics
-- Send real-time messages to drivers
+- Monitor performance statistics
+- Send real-time messages to delivery drivers
 
-### Delivery Driver Module
-- View daily assigned deliveries
-- Access customer details
-- Open destination directly in Google Maps
+---
+
+## Delivery Driver Module
+
+- View assigned daily deliveries
+- Access customer information
+- Open customer address directly in Google Maps
 - Update delivery status:
+
   - Delivered
   - In Progress
   - Not Delivered
   - Postponed
+
 - Send urgent messages to controller
-
-### Offline Mode
-The application supports **offline-first delivery management** using local SQLite storage.
-
-If the API becomes unavailable:
-- Data is loaded from local database
-- Modifications are stored locally
-- Synchronization happens automatically when connection is restored
 
 ---
 
-## Tech Stack
+## Offline Mode
 
-### Mobile Application
+WASSALNI supports **offline-first operation** using Room (SQLite).
+
+When network access is unavailable:
+
+✅ Delivery data is loaded from local database  
+✅ Updates are stored locally  
+✅ Synchronization happens automatically when connection is restored
+
+---
+
+# 🛠 Tech Stack
+
+## Mobile Application
 - Java 17
 - Android Studio
 - RecyclerView
 - CardView
 - Room (SQLite)
 
-### Backend
+---
+
+## Backend
 - Spring Boot 3.2.4
 - REST API
-- Java
+- Maven
 
-### Database
+---
+
+## Database
 - Oracle Database XE
 - SQL Developer
 
-### Networking
+---
+
+## Networking
 - Retrofit2
 - Gson
 
-### External Integration
-- Google Maps
+---
+
+## External Services
+- Google Maps Integration
 
 ---
 
-## Architecture
+# 🏗 Architecture
 
-The project follows a **3-tier architecture**:
+The project follows a **3-tier architecture**.
 
-### Presentation Layer
-Android mobile interface
+## 1. Presentation Layer
+Android mobile user interface
 
-### Business Logic Layer
+---
+
+## 2. Business Logic Layer
 Spring Boot REST API
 
-### Data Layer
-Oracle Database + Local SQLite cache
+Responsible for:
+
+- Authentication
+- Delivery management
+- Messaging
+- Statistics
 
 ---
 
-## Database Design
+## 3. Data Layer
 
-### Central Database (Oracle)
-Main relational database storing:
+### Central Database
+Oracle Database
+
+### Local Database
+Room (SQLite)
+
+Used for offline access and synchronization
+
+---
+
+# 🗄 Database Design
+
+## Oracle Central Database
+
+Main entities:
 
 - Personnel
 - Clients
-- Deliveries
 - Orders
+- Deliveries
 - Messages
+- Delivery details
 
-### Local Database (Room / SQLite)
-Used on delivery driver's device for:
+---
+
+## Local SQLite Database
+
+Stores delivery data on delivery driver's device.
+
+Purpose:
 
 - Offline access
-- Local state updates
+- Local updates
 - Deferred synchronization
 
 ---
 
-## API Endpoints
+# 🔌 API Endpoints
 
-### Authentication
+## Authentication
+
 ```http
 POST /api/login
+GET /api/livraisons
+GET /api/livraisons/today
+GET /api/livraisons/{id}/detail
+PUT /api/livraisons/{id}/etat
+POST /api/messages/envoyer
+GET /api/messages/conversation
+GET /api/messages/nonlus
